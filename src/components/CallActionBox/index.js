@@ -2,21 +2,24 @@ import { View, Text,StyleSheet, Pressable } from 'react-native'
 import React,{useState} from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-
+import { useNavigation } from '@react-navigation/core'
 const CallActionBox = () => {
     const [isCameraOn,setIsCameraOn]=useState(true);
     const [isMicOn,setIsMicOn]=useState(true);
+
+    const navigation=useNavigation();
   const onReverseCamera=()=>{
 
   }
   const onToggleCamera=()=>{
     setIsCameraOn(currentValue => !currentValue);
+   
   }
   const onToggleMicrophone=()=>{
     setIsMicOn(currentValue => !currentValue);
   }
   const onHangup=()=>{
-    
+    navigation.pop();
   }
 
 

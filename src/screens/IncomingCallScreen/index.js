@@ -4,8 +4,12 @@ import bg from '../../../assets/images/ios_bg.png';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Entypo from 'react-native-vector-icons/Entypo'
 import Feather from 'react-native-vector-icons/Feather'
+import {useNavigation,useRoute} from '@react-navigation/core';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const IncomingCallScreen = () => {
+    const navigation=useNavigation();
+ const route=useRoute();
 const onDecline=()=>{
     console.warn('on Decline');
 } ;
@@ -14,12 +18,30 @@ const onAccept=()=>{
     console.warn('on Accept');
 } ;
 
+const goBack=()=>{
+    //  Navigation.goBack();
+    navigation.pop();
+    };
+    const goForward=()=>{
+    navigation.navigate("Call");
+  
+    };
 
 
 
 
   return (
     <View style={styles.root}>
+
+    <Pressable onPress={goBack} style={styles.backButton}>
+      <Ionicons name="chevron-back" color="white" size={25} />
+    </Pressable>
+    <Pressable onPress={goForward} style={styles.forwardButton}>
+      <AntDesign name="right" color="white" size={25} />
+    </Pressable>
+
+
+
       <ImageBackground source={bg} style={styles.bg} resizeMode='cover'>
       <Text style={styles.name}>Shiva</Text>
       <Text style={styles.phoneNumber}> ringing +91 12456789579</Text>
@@ -98,7 +120,19 @@ iconButtonContainer:{
     padding:10,
     borderRadius:50,
     magin:10,
-}
+},
+backButton:{
+    position:'absolute',
+    top:50,
+    left:10,
+    zIndex:10,
+  },
+  forwardButton:{
+    position:'absolute',
+    top:50,
+    right:10,
+    zIndex:10,
+  }
 
 });
 

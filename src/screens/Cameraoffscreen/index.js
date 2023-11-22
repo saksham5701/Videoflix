@@ -3,7 +3,6 @@ import { View,StyleSheet,Pressable } from 'react-native'
 import CallActionBox from '../../components/CallActionBox'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import {useNavigation,useRoute} from '@react-navigation/core';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const CallScreen = () => {
   const navigation=useNavigation();
@@ -14,24 +13,14 @@ const CallScreen = () => {
     navigation.pop();
     };
 
-    const goForward=()=>{
-      navigation.navigate("cameraoff");
-    
-      };
-
   return (
     <View style={styles.root}>
     <View style={styles.page}>
     <Pressable onPress={goBack} style={styles.backButton}>
       <Ionicons name="chevron-back" color="white" size={25} />
     </Pressable>
-  
-    <Pressable onPress={goForward} style={styles.forwardButton}>
-      <AntDesign name="right" color="white" size={25} />
-    </Pressable>
 
-
-      <View style={styles.cameraPreview}  />
+      {/* <View style={styles.cameraPreview}  /> */}
 
       <CallActionBox/>
     </View>
@@ -62,12 +51,6 @@ const styles = StyleSheet.create({
       left:10,
       zIndex:10,
     },
-    forwardButton:{
-      position:'absolute',
-      top:50,
-      right:10,
-      zIndex:10,
-    }
 });
 
 export default CallScreen

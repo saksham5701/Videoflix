@@ -14,10 +14,7 @@ const CallScreen = () => {
     navigation.pop();
     };
 
-    const goForward=()=>{
-      navigation.navigate("cameraoff");
-    
-      };
+   
 
   return (
     <View style={styles.root}>
@@ -26,10 +23,7 @@ const CallScreen = () => {
       <Ionicons name="chevron-back" color="white" size={25} />
     </Pressable>
   
-    <Pressable onPress={goForward} style={styles.forwardButton}>
-      <AntDesign name="right" color="white" size={25} />
-    </Pressable>
-
+    
 
       <View style={styles.cameraPreview}  />
 

@@ -19,6 +19,7 @@ const CallingScreen = () => {
   const[callStatus,setCallStatus]=useState('Initializing...');
   const [localVideoStreamId,setLocalVideoStreamId]=useState('');
   const [remoteVideoStreamId,setRemoteVideoStreamId]=useState('');
+  const[cameraon,setcameraon]=useState(true);
 
   const navigation=useNavigation();
  const route=useRoute();
@@ -60,6 +61,9 @@ const CallingScreen = () => {
         sendVideo:true,
         receiveVideo:true,
       },
+      Audio:{
+        sendAudio:true,
+      }
     };
     
     const makeCall=async ()=>{
@@ -131,17 +135,24 @@ const CallingScreen = () => {
   const onHangupPress=()=>{
     call.current.hangup();
   };
+  const onmicoff=async ()=>{
+      console.log("Mic function run successfully")
+      call.current.sendAudio(false);
+  }
+  const onToggleCamera=async ()=>{
+    setcameraon(!cameraon);
+    call.current.sendVideo(cameraon);
+  }
 
 
   return (
-    <View style={styles.root}>
+    
     <View style={styles.page}>
     <Pressable onPress={goBack} style={styles.backButton}>
       <Ionicons name="chevron-back" color="white" size={25} />
     </Pressable>
-         
-    <Voximplant.VideoView videoStreamId={remoteVideoStreamId} style={styles.remoteVideo}/>
     <Voximplant.VideoView videoStreamId={localVideoStreamId} style={styles.localVideo}/>
+    <Voximplant.VideoView videoStreamId={remoteVideoStreamId} style={styles.remoteVideo}/>
     
 
      <View style={styles.cameraPreview}>
@@ -150,9 +161,9 @@ const CallingScreen = () => {
       {/* <View style={{flex:1}}/> */}
       </View>
 
-      <CallActionBox onHangupPress={onHangupPress}/>
+      <CallActionBox onHangupPress={onHangupPress} onmicoff={onmicoff} onToggleCamera={onToggleCamera} />
     </View>
-    </View>
+   
   );
 };
 
@@ -174,26 +185,25 @@ cameraPreview:{
 localVideo:{
 width:100,
 height:150,
-backgroundColor:'#ffff6e',
-borderRadius:10,
 position:'absolute',
 right:10,
-top:100,
+top:10,
+zIndex:100,
 },
 remoteVideo:{
-  backgroundColor:'#7b4e80',
-  borderRadius:10,
+  width :"100%",
   position:'absolute',
   left:0,
-  top:0,
   right:0,
-  bottom:100,
+  top:0,
+  bottom:44,
+  zIndex:-1
 },
 name:{
     fontSize:30,
     fontWeight:'bold',
     color:'white',
-    marginTop:50,
+    marginTop:20,
     marginBottom:15,
 },
 phoneNumber:{
@@ -202,9 +212,9 @@ phoneNumber:{
 },
 backButton:{
   position:'absolute',
-  top:50,
+  top:15,
   left:10,
-  zIndex:10,
+  zIndex:1,
 },
 
 });

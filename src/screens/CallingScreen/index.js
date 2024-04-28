@@ -189,6 +189,8 @@ position:'absolute',
 right:10,
 top:10,
 zIndex:100,
+
+
 },
 remoteVideo:{
   width :"100%",
